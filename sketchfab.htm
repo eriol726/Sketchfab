@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html>
+<style>
+    // Hidden class
+    .hidden {
+        visibility:hidden; height:0; width: 0;
+    }
+
+    /* Max width of the iframe */
+    .wrapper {
+        width: 500px
+    }
+
+    /* Button style */
+    .buttons {
+        margin-top: 10px;
+    }
+
+    button {
+        width: 80px;
+        height: 25px;
+        line-height: 21px;
+        text-transform: uppercase;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        vertical-align: middle;
+        float: left;
+        margin-right: 5px;
+    }
+
+    #blueButton {
+        background: #1caad9;
+    }
+
+    #orangeButton {
+        background: #ff9e3a;
+    }
+
+    #redButton {
+        background: #cc211f;
+    }
+    
+</style>
+<head>
+    <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.0.1.js"></script>
+</head>
+
+<body>
+  <p>This iframe was loaded by the Viewer API!</p>
+
+    <div class="wrapper">
+        <iframe src="" id="api-frame" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" width="1000px" height="800px"></iframe>
+        <div class="buttons">
+            <button id="blueButton">Järven</button>
+            <button id="orangeButton">Durban Dodo Skeleton</button>
+            <button id="redButton">Paço dos Alcaides</button>
+        </div>
+    </div>
+
+  <!-- Insert an empty iframe, hidden by default using a class-->
+
+  
+  <!-- Initialize the viewer -->
+  <script type="text/javascript">
+
+    var blueModel = '60182a48595847dd8832815c1b8e851f',
+        orangeModel = 'a6b9bcd5a2e54c2ea77958aeffe7d874',
+        redModel = '5c6965cc9640450d91ba7d788d4e01fe',
+        // Three buttons
+        blueButton = document.getElementById( 'blueButton' ),
+        orangeButton = document.getElementById( 'orangeButton' ),
+        redButton = document.getElementById( 'redButton' ),
+
+        client = null,
+        version = '1.0.0',
+
+        iframe = document.getElementById( 'api-frame' ),
+
+        client = new Sketchfab(version,iframe),
+
+        error = function () {
+            console.error('Sketchfab API Error!');
+        },
+
+        success = function( api) {
+            api.start();
+        }
+
+    function loadModel(client, urlid) {
+        console.log('loading a model');
+        client.init( urlid, {
+            success: success,
+            error: error,
+            /* This is where you can add additional options like Autospin */
+               // autospin: 0.5
+        });
+    }
+
+    // listen for click events on the buttons
+    blueButton.addEventListener('click', function(){
+        loadModel(client,blueModel);
+    });
+    orangeButton.addEventListener('click', function(){
+        loadModel(client, orangeModel);
+    });
+    redButton.addEventListener('click', function(){
+        loadModel(client,redModel);
+    });
+  </script>
+
+
+</body>
+
+</html>
