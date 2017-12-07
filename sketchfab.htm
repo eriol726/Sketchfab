@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html ng-app="app2">
 <style>
     // Hidden class
     .hidden {
@@ -45,6 +45,11 @@
 </style>
 <head>
     <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.0.1.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script type="text/javascript" src="gallery.js"></script>
+    <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="gallery.css">
 </head>
 
 <body>
@@ -59,11 +64,36 @@
         </div>
     </div>
 
+
+    <div ng-controller="GalleryCtrl">
+        <div id="header">
+            <h2>{{currentImage.description}}</h2>
+        </div>
+        <div id="galleryImage">
+             <iframe src="" id="api-frame2" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" width="1000px" height="800px"></iframe>
+            <!-- <img ng-src="{{currentImage.image}}" alt="{{currentImage.image.description}}"> -->
+        </div>
+        <div id="thumbWrapper">
+            <ul id="thumbList">
+                <li ng-repeat="image in images" ng-click="loadModel(image.image);">
+                    <image ng-src="{{image.thumbnail}}" alt="{{image.description}}">
+                </li>
+            </ul>
+        </div>
+    </div>
+
   <!-- Insert an empty iframe, hidden by default using a class-->
 
   
   <!-- Initialize the viewer -->
   <script type="text/javascript">
+
+    // var MyApp = angular.module('MyApp', []);
+
+    // MyApp.controller('ctrl1', function($scope){
+    //         $scope.randomNum1 = Math.floor((Math.random()*10)+1);
+    //         $scope.randomNum2 = Math.floor((Math.random()*10)+1);
+    // });
 
     var blueModel = '60182a48595847dd8832815c1b8e851f',
         orangeModel = 'a6b9bcd5a2e54c2ea77958aeffe7d874',
