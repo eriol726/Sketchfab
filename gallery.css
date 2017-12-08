@@ -1,16 +1,27 @@
-#galleryImage {
+#modelGallery {
 	width: 620px;
 	margin-bottom: 10px;
+	background-color: gray;
 }
 
-#galleryImage img{
+#header {
+	float: left;
+	background-color: lightgreen;
+	
+}
+
+#modelGallery img{
+	width: 500px;
 	display: block;
+	float: right;
 	margin: auto;
+	background-color: yellow;
 }
 
 #thumbWrapper {
 	width: 620px;
 	overflow: auto;
+	background-color: lightblue;
 }
 
 #thumbList {
@@ -28,4 +39,45 @@
 
 #thumbList li:hover {
 	opacity: 0.5;
+}
+
+.hidden {
+    visibility:hidden; height:0; width: 0;
+}
+
+/* Max width of the iframe */
+.wrapper {
+    width: 720px;
+    background-color: red;
+}
+
+/* Button style */
+.buttons {
+    margin-top: 10px;
+}
+
+button {
+    width: 80px;
+    height: 25px;
+    line-height: 21px;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+    float: left;
+    margin-right: 5px;
+}
+
+#blueButton {
+    background: #1caad9;
+}
+
+#orangeButton {
+    background: #ff9e3a;
+}
+
+#redButton {
+    background: #cc211f;
 }

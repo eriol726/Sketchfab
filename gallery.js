@@ -1,26 +1,34 @@
 var app2 = angular.module('app2', []);
 
 app2.controller('GalleryCtrl', function($scope){
-		$scope.images = [
-		{image : '60182a48595847dd8832815c1b8e851f', thumbnail : 'img/tn_IMG_0001.jpg', description : 'A sample picture 1'},
-		{image : 'a6b9bcd5a2e54c2ea77958aeffe7d874', thumbnail : 'img/tn_IMG_0002.jpg', description : 'A sample picture 2'},
-		{image : '5c6965cc9640450d91ba7d788d4e01fe', thumbnail : 'img/tn_IMG_0003.jpg', description : 'A sample picture 3'}
+		$scope.models = [
+		{urlid : '60182a48595847dd8832815c1b8e851f', thumbnail : 'img/tn_IMG_0001.jpg', name: 'Jarven', description : 'A sample picture 1'},
+		{urlid : 'a6b9bcd5a2e54c2ea77958aeffe7d874', thumbnail : 'img/tn_IMG_0002.jpg', name: 'Durban Dodo Skeleton', description : 'A sample picture 2'},
+		{urlid : '5c6965cc9640450d91ba7d788d4e01fe', thumbnail : 'img/tn_IMG_0003.jpg', name: 'Castelo de Montemor', description : 'A sample picture 3'}
 	];
 
-	$scope.currentImage = _.first($scope.images);
 
-	$scope.setCurrentImage = function(image) {
-		$scope.currentImage = image;
-	}
+
+	 console.log($scope.currentModel);
+	// if($scope.currentModel == null){
+	// 	$scope.currentModel = _.first($scope.models);
+	// } 
+		
+
 
 	
 
-	$scope.loadModel = function(urlid) {
+	$scope.setCurrentModel = function(model) {
+		$scope.currentModel = model;
+	}
+
+	$scope.loadModel = function(model) {
         console.log('loading a model');
         var client = null;
 	    var version = '1.0.0';
 
-	    var iframe = document.getElementById( 'api-frame2' );
+
+	    var iframe = document.getElementById( 'api-frame' );
 
 	    var client = new Sketchfab(version,iframe);
 
@@ -31,12 +39,14 @@ app2.controller('GalleryCtrl', function($scope){
 	    success = function( api) {
 	        api.start();
 	    }
-        client.init( urlid, {
+        client.init( model.urlid, {
             success: success,
             error: error,
             /* This is where you can add additional options like Autospin */
                // autospin: 0.5
         });
+
+        $scope.currentModel = model;
 
     }
 });
