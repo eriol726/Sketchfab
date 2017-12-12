@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html >
+<style>
+    // Hidden class
+
+    
+</style>
+<head>
+
+    
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/readable/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="gallery.css">
+
+    <script type="text/javascript" src="https://static.sketchfab.com/api/sketchfab-viewer-1.0.1.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+
+
+    <script type="text/javascript" src="gallery.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body ng-app="app2" ng-cloak>
+
+    
+    
+
+    <div id="about">
+        <p>A demo on Angular Animations: ng-view</p>
+        <p>View the <a href="http://scotch.io/tutorials/javascript/animating-angularjs-apps-ngview">Scotch.io Tutorial</a></p>
+    </div>
+        
+
+    <div class="wrapper">
+
+
+
+        <div ng-controller="GalleryCtrl">
+            <div id="header">
+                <h2>{{currentModel.name}}</h2>
+                <p>{{currentModel.description}}</p>
+            </div>
+            <div id="modelGallery">
+                <div ng-if="currentModel == null">
+                    <p id="demo"></p>
+                    <td>{{loadModel(models[0])}}</td>
+                </div>
+
+                <iframe src="" id="api-frame" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" ></iframe>
+
+            </div>
+            <div id="footer">
+                <p>Options</p>
+                <div id="thumbWrapper">
+<!--                     <button ng-click="go('/home')"></button>
+                    <a href="#/!home">Go Home</a>
+                    <a href="#!red">Red</a> -->
+                    <a href="#!about" class="btn btn-success btn-lg">About</a>
+                    <div class="page {{ pageClass }}" ng-view></div>
+
+                    <image id="return" ng-src="img/tn_IMG_0001.jpg" ng-click="back()" >
+                    <ul id="thumbList">
+                        <li ng-repeat="model in models" ng-click="loadModel(model);">
+                            <image ng-src="{{model.thumbnail}}" alt="{{model.description}}">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+
+  <!-- Insert an empty iframe, hidden by default using a class-->
+  
+  <!-- Initialize the viewer -->
+
+<script>
+document.getElementById("demo").innerHTML = "currentModel null";
+
+</script>
+</body>
+
+
+
+</html>

@@ -11,36 +11,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
     <script type="text/javascript" src="gallery.js"></script>
     <!-- <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="gallery.css">
 </head>
 
 <body>
     <div class="wrapper">
 
-    <div ng-controller="GalleryCtrl">
-        <div id="header">
-            <h2>{{currentModel.name}}</h2>
-            <p>{{currentModel.description}}</p>
-        </div>
-        <div id="modelGallery">
-            <div ng-if="currentModel == null">
-                <p id="demo"></p>
-                <td>{{loadModel(models[0])}}</td>
-            </div>
 
-            <iframe src="" id="api-frame" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" width="400" height="200px"></iframe>
-
-        </div>
-        <div id="footer">
             <p>Options</p>
-            <div id="thumbWrapper">
-                <ul id="thumbList">
-                    <li ng-repeat="model in models" ng-click="loadModel(model);">
-                        <image ng-src="{{model.thumbnail}}" alt="{{model.description}}">
-                    </li>
-                </ul>
-            </div>
-        </footer>
 
         
 

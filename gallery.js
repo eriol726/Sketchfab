@@ -1,8 +1,46 @@
-var app2 = angular.module('app2', []);
+var app2 = angular.module('app2', ['ngRoute', 'ngAnimate']);
+
+app2.config(function($routeProvider) {
+    $routeProvider
+    	.when('/', {
+    		templateUrl: 'page-home.html',
+            controller: 'mainController'
+    	})
+    	.when('/about', {
+    		templateUrl: 'page-about.html',
+            controller: 'aboutController'
+    	})
+    	.when('/contact', {
+    		templateUrl: 'page-contact.html',
+            controller: 'contactController'
+    	});
+
+});
+
+app2.controller('mainController', function($scope) {
+	$scope.testValue = 0;
+	console.log('tjaa page-home');
+    $scope.pageClass = 'page-home';
+
+    // $interval(function() {
+    //     $scope.testValue++;
+    // }, 500);
+});
+
+app2.controller('aboutController', function($scope) {
+	console.log('tjaa page-about');
+    $scope.pageClass = 'page-about';
+});
+
+app2.controller('contactController', function($scope) {
+	console.log('tjaa page-contact');
+    $scope.pageClass = 'page-contact';
+});
+
 
 app2.controller('GalleryCtrl', function($scope){
 		$scope.models = [
-		{urlid : '60182a48595847dd8832815c1b8e851f', thumbnail : 'img/tn_IMG_0001.jpg', name: 'Jarven', description : 'A sample picture 1'},
+		{urlid : '340b71e8939a417795d1bcf76ef514bd', thumbnail : 'img/tn_IMG_0001.jpg', name: 'Jarven', description : 'A sample picture 1'},
 		{urlid : 'a6b9bcd5a2e54c2ea77958aeffe7d874', thumbnail : 'img/tn_IMG_0002.jpg', name: 'Durban Dodo Skeleton', description : 'A sample picture 2'},
 		{urlid : '5c6965cc9640450d91ba7d788d4e01fe', thumbnail : 'img/tn_IMG_0003.jpg', name: 'Castelo de Montemor', description : 'A sample picture 3'}
 	];
@@ -14,6 +52,19 @@ app2.controller('GalleryCtrl', function($scope){
 	// 	$scope.currentModel = _.first($scope.models);
 	// } 
 		
+
+	// $scope.back = function() {
+	// 	console.log('tjaa');
+	// }
+
+	// $scope.go = function ( path ) {
+	// 	console.log('tjaa');
+	//   $location.path( path );
+	// };
+
+	// <button ng-click="go('/home')"></button>
+ //    <a href="#/!home">Go Home</a>
+ //    <a href="#!red">Red</a> 
 
 
 	
