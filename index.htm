@@ -29,7 +29,7 @@
 <body ng-app="app2" ng-cloak>
 
     
-    
+    <div class="page {{ pageClass }}" ng-view></div>
 
     <div id="about">
         <p>A demo on Angular Animations: ng-view</p>
@@ -40,39 +40,6 @@
     <div class="wrapper">
 
 
-
-        <div ng-controller="GalleryCtrl">
-            <div id="header">
-                <h2>{{currentModel.name}}</h2>
-                <p>{{currentModel.description}}</p>
-            </div>
-            <div id="modelGallery">
-                <div ng-if="currentModel == null">
-                    <p id="demo"></p>
-                    <td>{{loadModel(models[0])}}</td>
-                </div>
-
-                <iframe src="" id="api-frame" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" ></iframe>
-
-            </div>
-            <div id="footer">
-                <p>Options</p>
-                <div id="thumbWrapper">
-<!--                     <button ng-click="go('/home')"></button>
-                    <a href="#/!home">Go Home</a>
-                    <a href="#!red">Red</a> -->
-                    <a href="#!about" class="btn btn-success btn-lg">About</a>
-                    <div class="page {{ pageClass }}" ng-view></div>
-
-                    <image id="return" ng-src="img/tn_IMG_0001.jpg" ng-click="back()" >
-                    <ul id="thumbList">
-                        <li ng-repeat="model in models" ng-click="loadModel(model);">
-                            <image ng-src="{{model.thumbnail}}" alt="{{model.description}}">
-                        </li>
-                    </ul>
-                </div>
-            </div>
-    </div>
 
   <!-- Insert an empty iframe, hidden by default using a class-->
   
