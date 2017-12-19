@@ -17,6 +17,45 @@ app2.config(function($routeProvider) {
 
 });
 
+app2.factory('UserService', function() {
+	var savedData = {}
+
+	function set(data) {
+	savedData = data;
+	}
+
+	function get() {
+	return savedData;
+	}
+
+	return {
+	set: set,
+	get: get
+	}
+
+});
+
+// $scope.currentModel = null;
+
+app2.controller('GalleryCtrl2', function($scope, $location, UserService) {
+	$scope.models = [
+		{urlid : '340b71e8939a417795d1bcf76ef514bd', thumbnail : 'img/tn_IMG_0001.jpg', name: 'Jarven', description : 'A sample picture 1'},
+		{urlid : 'a6b9bcd5a2e54c2ea77958aeffe7d874', thumbnail : 'img/tn_IMG_0002.jpg', name: 'Durban Dodo Skeleton', description : 'A sample picture 2'},
+		{urlid : '5c6965cc9640450d91ba7d788d4e01fe', thumbnail : 'img/tn_IMG_0003.jpg', name: 'Castelo de Montemor', description : 'A sample picture 3'}
+	];
+	// myService.set(yourSharedData);
+
+	$scope.setCurrentModel = function(model, path) {
+		UserService.set(model);
+
+		$scope.currentModel = model;
+		$location.path( path ); 
+		console.log('loading and routing', path , ' ' , model.urlid);
+	}
+
+	
+});
+
 app2.controller('mainController', function($scope) {
 	$scope.testValue = 0;
 	console.log('tjaa page-home');
@@ -38,21 +77,21 @@ app2.controller('contactController', function($scope) {
 });
 
 
-app2.controller('GalleryCtrl', function($scope){
+app2.controller('GalleryCtrl', function($scope,$location, UserService){
 		$scope.models = [
 		{urlid : '340b71e8939a417795d1bcf76ef514bd', thumbnail : 'img/tn_IMG_0001.jpg', name: 'Jarven', description : 'A sample picture 1'},
 		{urlid : 'a6b9bcd5a2e54c2ea77958aeffe7d874', thumbnail : 'img/tn_IMG_0002.jpg', name: 'Durban Dodo Skeleton', description : 'A sample picture 2'},
 		{urlid : '5c6965cc9640450d91ba7d788d4e01fe', thumbnail : 'img/tn_IMG_0003.jpg', name: 'Castelo de Montemor', description : 'A sample picture 3'}
 	];
 
-
-
+	//$scope.name = UserService.name;
+	// $scope.currentModel = null;
 	 console.log($scope.currentModel);
 	// if($scope.currentModel == null){
 	// 	$scope.currentModel = _.first($scope.models);
 	// } 
 		
-
+	
 	// $scope.back = function() {
 	// 	console.log('tjaa');
 	// }
@@ -66,15 +105,20 @@ app2.controller('GalleryCtrl', function($scope){
  //    <a href="#/!home">Go Home</a>
  //    <a href="#!red">Red</a> 
 
-
-	
-
-	$scope.setCurrentModel = function(model) {
+	$scope.setCurrentModel = function(model, path) {
 		$scope.currentModel = model;
+		$location.path( path ); 
+		console.log('loading and routing', path , ' ' , model.urlid);
 	}
 
+
 	$scope.loadModel = function(model) {
+
+		$scope.desiredModel = UserService.get();
+
         console.log('loading a model');
+        console.log(UserService.name);
+        console.log('$scope.currentModel ', $scope.currentModel);
         var client = null;
 	    var version = '1.0.0';
 
@@ -90,7 +134,7 @@ app2.controller('GalleryCtrl', function($scope){
 	    success = function( api) {
 	        api.start();
 	    }
-        client.init( model.urlid, {
+        client.init( $scope.desiredModel.urlid, {
             success: success,
             error: error,
             /* This is where you can add additional options like Autospin */

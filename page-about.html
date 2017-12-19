@@ -3,3 +3,12 @@
 
 <a href="#!" class="btn btn-primary btn-lg">Home</a>
 <a href="#!contact" class="btn btn-danger btn-lg">Contact</a>
+
+<div ng-controller="GalleryCtrl2">
+	<ul id="thumbList">
+	    <a href="#!about"><i class="material-icons" style="font-size: 100px">arrow_back</i></a>
+	    <li ng-repeat="model in models" ng-click="setCurrentModel(model, '/');">
+	        <image ng-src="{{model.thumbnail}}" alt="{{model.description}}">
+	    </li>
+	</ul>
+</div>

@@ -11,8 +11,8 @@
     </div>
     <div id="modelGallery">
         <div ng-if="currentModel == null">
-            
-            <td>{{loadModel(models[0])}}</td>
+            <p id="demo"></p>
+            <td>{{loadModel(model.currentModel)}}</td> 
         </div>
 
         <iframe src="" id="api-frame" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" ></iframe>
@@ -22,12 +22,13 @@
         <p>Options</p>
         <div id="thumbWrapper">
 
-        	<a  href="#!about">
-			  <img id="return" border="0" alt="Back" src="img/tn_IMG_0001.jpg"  width="100" height="100">
-			</a>
+        	
+
+			
             <!-- <image id="return" ng-src="img/tn_IMG_0001.jpg" ng-click="back()" > -->
 
             <ul id="thumbList">
+                <a href="#!about"><i class="material-icons" style="font-size: 100px">arrow_back</i></a>
                 <li ng-repeat="model in models" ng-click="loadModel(model);">
                     <image ng-src="{{model.thumbnail}}" alt="{{model.description}}">
                 </li>
@@ -35,3 +36,14 @@
         </div>
     </div>
 </div>
+
+<script>
+document.getElementById("demo").innerHTML = "currentModel is null";
+
+    $(function () {  
+        $("#api-frame").load(function () {                        
+            frames["api-frame"].document.body.innerHTML = htmlValue;
+        });
+    }); 
+
+</script>

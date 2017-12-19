@@ -136,17 +136,14 @@ html         { overflow-y:hidden; }
 
 /* home -------------------------- */
 .page-home.ng-leave         {
-    -webkit-transform-origin: 0% 0%;
-	-webkit-animation: rotateFall 1s both ease-in;
-	-moz-transform-origin: 0% 0%;
-	-moz-animation: rotateFall 1s both ease-in;
-	transform-origin: 0% 0%;
-	animation: rotateFall 1s both ease-in;
+    -webkit-animation:slideOutRight 0.5s both ease-in;
+	-moz-animation:slideOutRight 0.5s both ease-in;
+	animation:slideOutRight 0.5s both ease-in;   
 }
 .page-home.ng-enter 		{  
-    -webkit-animation:scaleUp 0.5s both ease-in;
-	-moz-animation:scaleUp 0.5s both ease-in;
-	animation:scaleUp 0.5s both ease-in;    
+    -webkit-animation:slideInRight 0.5s both ease-in;
+	-moz-animation:slideInRight 0.5s both ease-in;
+	animation:slideInRight 0.5s both ease-in;    
 }
 
 /* about ------------------------ */
@@ -156,24 +153,21 @@ html         { overflow-y:hidden; }
 	animation:slideOutLeft 0.5s both ease-in;   
 }
 .page-about.ng-enter 		{  
-    -webkit-animation:slideInRight 0.5s both ease-in;
-	-moz-animation:slideInRight 0.5s both ease-in;
-	animation:slideInRight 0.5s both ease-in;    
+    -webkit-animation:slideInLeft 0.5s both ease-in;
+	-moz-animation:slideInLeft 0.5s both ease-in;
+	animation:slideInLeft 0.5s both ease-in;     
 }
 
 /* contact ---------------------- */
 .page-contact.ng-leave      {
-    -webkit-transform-origin: 50% 50%;
-	-webkit-animation: rotateOutNewspaper .5s both ease-in;
-	-moz-transform-origin: 50% 50%;
-	-moz-animation: rotateOutNewspaper .5s both ease-in;
-	transform-origin: 50% 50%;
-	animation: rotateOutNewspaper .5s both ease-in;
+    -webkit-animation:slideOutLeft 0.5s both ease-in;
+	-moz-animation:slideOutLeft 0.5s both ease-in;
+	animation:slideOutLeft 0.5s both ease-in;   
 }
 .page-contact.ng-enter 		{ 
-    -webkit-animation:slideInUp 0.5s both ease-in;
-	-moz-animation:slideInUp 0.5s both ease-in;
-	animation:slideInUp 0.5s both ease-in;  
+    -webkit-animation:slideInRight 0.5s both ease-in;
+	-moz-animation:slideInRight 0.5s both ease-in;
+	animation:slideInRight 0.5s both ease-in;    
 }
 
 /* rotate and fall */
@@ -224,6 +218,21 @@ html         { overflow-y:hidden; }
 	to 		{ -webkit-transform: translateX(0); }
 }
 
+/* slide in from the right */
+@keyframes slideOutRight {
+	from 	{ transform:translateX(0%); }
+	to 		{ transform: translateX(100%); }
+}
+@-moz-keyframes slideInRight {
+	from 	{ -moz-transform:translateX(0); }
+	to 		{ -moz-transform: translateX(100%); }
+}
+@-webkit-keyframes slideInRight {
+	from 	{ -webkit-transform:translateX(0); }
+	to 		{ -webkit-transform: translateX(100%); }
+}
+
+
 /* slide in from the bottom */
 @keyframes slideInUp {
 	from 	{ transform:translateY(100%); }
@@ -249,6 +258,17 @@ html         { overflow-y:hidden; }
 	to 		{ -webkit-transform: translateX(-100%); }
 }
 
+/* slide in from the bottom */
+@keyframes slideInLeft {
+	to 		{ transform: translateX(0%); }
+}
+@-moz-keyframes slideOutLeft {	
+	to 		{ -moz-transform: translateX(0%); }
+}
+@-webkit-keyframes slideOutLeft {
+	to 		{ -webkit-transform: translateX(0%); }
+}
+
 /* rotate out newspaper */
 @-webkit-keyframes rotateOutNewspaper {
 	to { -webkit-transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
@@ -258,4 +278,20 @@ html         { overflow-y:hidden; }
 }
 @keyframes rotateOutNewspaper {
 	to { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
+}
+
+
+
+.slidein-from-right {
+    -webkit-animation: slidein-from-right2 500ms;
+}
+@-webkit-keyframes slidein-from-right2 {
+    from {
+        opacity: 0;
+        -webkit-transform:translateX(100%);
+    }
+    to {
+        opacity: 1;
+        -webkit-transform:translateX(0%);
+    }
 }
