@@ -61,6 +61,7 @@ app2.controller('mainController', function($scope) {
 	console.log('tjaa page-home');
     $scope.pageClass = 'page-home';
 
+
     // $interval(function() {
     //     $scope.testValue++;
     // }, 500);
@@ -84,9 +85,12 @@ app2.controller('GalleryCtrl', function($scope,$location, UserService){
 		{urlid : '5c6965cc9640450d91ba7d788d4e01fe', thumbnail : 'img/tn_IMG_0003.jpg', name: 'Castelo de Montemor', description : 'A sample picture 3'}
 	];
 
+	$scope.currentModel = _.first($scope.images); 
+
+
 	//$scope.name = UserService.name;
 	// $scope.currentModel = null;
-	 console.log($scope.currentModel);
+	 
 	// if($scope.currentModel == null){
 	// 	$scope.currentModel = _.first($scope.models);
 	// } 
@@ -106,9 +110,17 @@ app2.controller('GalleryCtrl', function($scope,$location, UserService){
  //    <a href="#!red">Red</a> 
 
 	$scope.setCurrentModel = function(model, path) {
-		$scope.currentModel = model;
-		$location.path( path ); 
+
+
 		console.log('loading and routing', path , ' ' , model.urlid);
+		UserService.set(model);
+		$scope.currentModel = model;
+		
+		$location.path( path );
+		$scope.loadModel(model); 
+		
+		
+
 	}
 
 
@@ -116,8 +128,20 @@ app2.controller('GalleryCtrl', function($scope,$location, UserService){
 
 		$scope.desiredModel = UserService.get();
 
-        console.log('loading a model');
-        console.log(UserService.name);
+		console.log('model: ', model);
+
+		if (model == null){
+			console.log('$scope.desiredMode is undefined');
+			model = $scope.desiredModel;
+		}
+
+		if (model === undefined || model === null) {
+     		console.log('$scope.desiredMode is undefined2');
+     		model = $scope.desiredModel;
+		}
+
+        console.log('$scope.desiredModel ', $scope.desiredModel);
+        console.log('clicked model.id', model.urlid);
         console.log('$scope.currentModel ', $scope.currentModel);
         var client = null;
 	    var version = '1.0.0';
@@ -127,6 +151,8 @@ app2.controller('GalleryCtrl', function($scope,$location, UserService){
 
 	    var client = new Sketchfab(version,iframe);
 
+	    console.log('iframe ', iframe);
+
 	    error = function () {
 	        console.error('Sketchfab API Error!');
 	    },
@@ -134,7 +160,7 @@ app2.controller('GalleryCtrl', function($scope,$location, UserService){
 	    success = function( api) {
 	        api.start();
 	    }
-        client.init( $scope.desiredModel.urlid, {
+        client.init( model.urlid, {
             success: success,
             error: error,
             /* This is where you can add additional options like Autospin */
