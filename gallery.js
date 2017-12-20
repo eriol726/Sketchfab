@@ -1,10 +1,10 @@
-var app2 = angular.module('app2', ['ngRoute', 'ngAnimate']);
+var app2 = angular.module('app2', ['ngRoute', 'ngAnimate', 'ngStorage']);
 
 app2.config(function($routeProvider) {
     $routeProvider
     	.when('/', {
     		templateUrl: 'page-home.html',
-            controller: 'mainController'
+            controller: 'GalleryCtrl'
     	})
     	.when('/about', {
     		templateUrl: 'page-about.html',
@@ -78,15 +78,17 @@ app2.controller('contactController', function($scope) {
 });
 
 
-app2.controller('GalleryCtrl', function($scope,$location, UserService){
+app2.controller('GalleryCtrl', function($scope, $location, $localStorage, $sessionStorage,UserService){
 		$scope.models = [
 		{urlid : '340b71e8939a417795d1bcf76ef514bd', thumbnail : 'img/tn_IMG_0001.jpg', name: 'Jarven', description : 'A sample picture 1'},
 		{urlid : 'a6b9bcd5a2e54c2ea77958aeffe7d874', thumbnail : 'img/tn_IMG_0002.jpg', name: 'Durban Dodo Skeleton', description : 'A sample picture 2'},
 		{urlid : '5c6965cc9640450d91ba7d788d4e01fe', thumbnail : 'img/tn_IMG_0003.jpg', name: 'Castelo de Montemor', description : 'A sample picture 3'}
 	];
 
-	$scope.currentModel = _.first($scope.images); 
-
+	//$scope.currentModel = _.first($scope.models); 
+	$scope.pageClass = 'page-home';
+	console.log('refresh');
+	//$scope.loadModel($scope.currentModel); 
 
 	//$scope.name = UserService.name;
 	// $scope.currentModel = null;
@@ -112,9 +114,13 @@ app2.controller('GalleryCtrl', function($scope,$location, UserService){
 	$scope.setCurrentModel = function(model, path) {
 
 
-		console.log('loading and routing', path , ' ' , model.urlid);
+		console.log('loading and routing', path , ' ' , model);
 		UserService.set(model);
-		$scope.currentModel = model;
+		//$scope.currentModel = model;
+
+		var exemple = "hej";
+		localStorage.setItem("token", JSON.stringify(model));
+		
 		
 		$location.path( path );
 		$scope.loadModel(model); 
@@ -131,18 +137,25 @@ app2.controller('GalleryCtrl', function($scope,$location, UserService){
 		console.log('model: ', model);
 
 		if (model == null){
-			console.log('$scope.desiredMode is undefined');
+			console.log('model is undefined');
 			model = $scope.desiredModel;
+
+			if(angular.equals({}, $scope.desiredModel) ){
+				var refreshModel = JSON.parse(localStorage.getItem("token"));
+
+				console.log('desiredModel is null and a object');
+				// model = _.first($scope.models);
+				model = refreshModel; //returns "xxx";
+			}
+
 		}
 
-		if (model === undefined || model === null) {
-     		console.log('$scope.desiredMode is undefined2');
-     		model = $scope.desiredModel;
-		}
 
+
+		console.log('$scope.currentModel ', $scope.currentModel);
         console.log('$scope.desiredModel ', $scope.desiredModel);
-        console.log('clicked model.id', model.urlid);
-        console.log('$scope.currentModel ', $scope.currentModel);
+        console.log('clicked model.id', model);
+        
         var client = null;
 	    var version = '1.0.0';
 
@@ -167,6 +180,7 @@ app2.controller('GalleryCtrl', function($scope,$location, UserService){
                // autospin: 0.5
         });
 
+        localStorage.setItem("token", JSON.stringify(model));
         $scope.currentModel = model;
 
     }
